@@ -1,0 +1,9 @@
+node_modules/
+dist/
+dist-cli/
+dist-electron/
+release/
+.agent_team/
+*.log
+.DS_Store
+Thumbs.db

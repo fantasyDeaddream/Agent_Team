@@ -1,0 +1,6 @@
+{
+  "main": "dist-cli/agent-team-cli.cjs",
+  "output": "release/agent-team-cli.exe",
+  "disableExperimentalSEAWarning": true,
+  "useCodeCache": false
+}

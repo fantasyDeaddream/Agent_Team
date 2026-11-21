@@ -1,0 +1,30 @@
+appId: com.agentteam.desktop
+productName: Agent_Team
+artifactName: ${productName}-Setup-v${version}-GUI-CLI.${ext}
+directories:
+  output: release
+  buildResources: build
+files:
+  - dist/**/*
+  - dist-electron/**/*
+  - package.json
+extraResources:
+  - from: release/agent-team-cli.exe
+    to: bin/agent-team.exe
+  - from: build/path-helper.ps1
+    to: bin/path-helper.ps1
+asar: true
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Agent_Team
+  include: build/installer.nsh
+  artifactName: ${productName}-Setup-v${version}-GUI-CLI.${ext}

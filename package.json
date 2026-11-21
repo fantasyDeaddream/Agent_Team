@@ -1,0 +1,46 @@
+{
+  "name": "agent-team",
+  "version": "1.0.0",
+  "description": "Agent_Team — 跨原生 Harness 多 AI Agent 协同编排桌面工作台与 CLI (Antigravity / Claude Code / Codex / DeepSeek Harness / OpenCode / ZCode)",
+  "main": "dist-electron/main.js",
+  "bin": {
+    "agent-team": "dist-electron/cli.js"
+  },
+  "author": "Agent_Team",
+  "license": "MIT",
+  "scripts": {
+    "dev:renderer": "vite",
+    "dev:electron": "tsc -p tsconfig.electron.json --watch",
+    "dev": "concurrently -k \"npm run dev:renderer\" \"tsc -p tsconfig.electron.json && wait-on http://localhost:5173 && electron .\"",
+    "build:electron": "tsc -p tsconfig.electron.json",
+    "build:renderer": "vite build",
+    "build:cli": "npx esbuild electron/cli.ts --bundle --platform=node --format=cjs --target=node22 --outfile=dist-cli/agent-team-cli.cjs && node --build-sea=sea-config.json",
+    "build": "npm run build:electron && npm run build:renderer",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.electron.json --noEmit",
+    "start": "npm run build && electron .",
+    "dist:win": "npm run build && npm run build:cli && electron-builder --win --x64",
+    "dist:cli-installer": "npm run build:cli && node scripts/build-cli-installer.mjs",
+    "dist:win-dir": "npm run build && npm run build:cli && electron-builder --win --x64 --dir",
+    "dist:all": "npm run dist:win && node scripts/build-cli-installer.mjs"
+  },
+  "dependencies": {
+    "lucide-react": "^0.511.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^9.1.2",
+    "electron": "^35.2.0",
+    "electron-builder": "^26.0.12",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "wait-on": "^8.0.3"
+  }
+}
