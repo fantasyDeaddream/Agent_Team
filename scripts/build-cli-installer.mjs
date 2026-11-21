@@ -44,7 +44,7 @@ console.log(`Building Pure CLI Installer with ${makensis}...`);
 
 const res = spawnSync(
   makensis,
-  [`/DAPP_VERSION=${pkg.version}`, nsiScript],
+  ['/INPUTCHARSET', 'UTF8', `/DAPP_VERSION=${pkg.version}`, nsiScript],
   { cwd: root, stdio: 'inherit' }
 );
 
